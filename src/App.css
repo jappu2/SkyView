@@ -1,9 +1,15 @@
 
 :root{
-  --background: #003049;
+  /* f4f1de e07a5f 3d405b 81b291 */
+  --background: #f4f1de;
+  --primary: #3d405b;
+  --secondary: #e07a5f;
+  --white: #81b291;
+
+  /* --background: #003049;
   --primary: #b14242;
   --secondary: #fcbf49;
-  --white: #D9D9D9;
+  --white: #D9D9D9; */
 }
 
 body {
@@ -58,6 +64,7 @@ form {
   margin-bottom: 20px;
   width: 80%;
   margin: auto;
+  height: 50px;
 }
 
 input[type="text"] {
@@ -85,8 +92,13 @@ button:hover {
 
 .main {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 
+}
+
+.main>img{
+  cursor: pointer;
+  margin-top: 120px;
 }
 .main>div {
   height: 315px;
@@ -105,6 +117,10 @@ button:hover {
   width: 660px;
   background: linear-gradient(112.67deg, var(--primary) 32.23%, #333333 67.37%);  border-radius: 35px;
 
+}
+
+.temperature>div>div{
+  font-size: 25px;
 }
 .yesterday, .tomorrow{
   /* background: linear-gradient(112.67deg, var(--secondary) 32.23%, #333333 67.37%);  border-radius: 35px; */
@@ -153,22 +169,37 @@ button:hover {
 .forecast{
   display: flex;
   justify-content: space-around;
+  width: 100%;
   margin-top: 30px;
 }
 
 .forecast-element{
+  position: relative;
   width: 120px;
   height: 120px;
   background: linear-gradient(112.67deg, var(--primary) 32.23%, #333333 67.37%);  
-  border-radius: 35px;
+  border-radius: 25px;
   font-size: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: var(--white);
+  color: white;
   font-weight: normal;
 
 }
+
+.forecast-element>div{
+  z-index: 1;
+}
+.forecast-element .second-background{
+  bottom: 0;
+  height: 58px;
+  width: 100%;
+  position: absolute;
+  background: linear-gradient(106.31deg, #373333 3.93%, rgba(55, 51, 51, 0) 100%);
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  backdrop-filter: blur(4px);
+  border-radius: 25px;}
 @media screen and (max-width: 600px) {
   h1 {
     font-size: 28px;
@@ -199,4 +230,88 @@ button:hover {
   .weather-details p {
     font-size: 16px;
   }
+}
+
+
+@media screen and (max-width: 1400px) {
+  body{
+    padding: 0 5%;
+  }
+}
+
+@media screen and (max-width: 1240px) {
+  body{
+    padding: 0 1%;
+  }
+  .main>img, 
+  .yesterday, 
+  .tomorrow{
+    display: none !important;
+  }
+
+  
+  .container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: unset;
+    margin: unset;
+    justify-content: center;
+  }
+
+  #root>div:not(.header-container){
+    display: flex;
+    justify-content: center;
+  }
+  .forecast{
+    gap:3px;
+  }
+}
+
+@media screen and (max-width: 790px) {
+  body{
+    padding: 0;
+
+  }
+  .forecast{
+    flex-wrap: wrap;
+  }
+
+  .header-container {
+    padding: 20px;
+  }
+
+  .main {
+    width: 90vw;
+}
+  .forecast{
+    gap: 6px;
+  }
+  .forecast>div{
+    width: 90vw;
+    
+  }
+
+
+}
+
+@media screen and (max-width: 520px) {
+  
+.main .weather-details {
+  height: auto;
+}
+.weather-details .other-status{
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.weather-details .other-status>div{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+.weather-details .other-status div div:first-child::after{
+  content: ': ';
+}
 }

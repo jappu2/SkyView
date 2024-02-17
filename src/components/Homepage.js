@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import search from '../images/search.svg';
 import location from '../images/location.svg';
 import thermo from '../images/thermo.svg';
-import clear from '../images/clear.svg';
-
+import leftArrow from '../images/left-arrow.svg';
+import rightArrow from '../images/right-arrow.svg';
 
 function Homepage(props) { 
   const [city, setCity] = useState('');
-  const [weatherData, setWeatherData] = useState();
+  const [weatherData, setWeatherData] = useState(
+    { "coord": { "lon": 7.4474, "lat": 46.9481 }, "weather": [ { "id": 800, "main": "Clear", "description": "clear sky", "icon": "01n" } ], "base": "stations", "main": { "temp": 2.07, "feels_like": 2.07, "temp_min": -2.58, "temp_max": 6.48, "pressure": 1031, "humidity": 79 }, "visibility": 10000, "wind": { "speed": 0.89, "deg": 73, "gust": 1.34 }, "clouds": { "all": 0 }, "dt": 1707028453, "sys": { "type": 1, "id": 6937, "country": "CH", "sunrise": 1707029529, "sunset": 1707064556 }, "timezone": 3600, "id": 2661552, "name": "Bern", "cod": 200 }
+  );
   const [forecast, setForecast] = useState([
     { 'temp': 11, 'weather': 'clear'},
     { 'temp': 14, 'weather': 'rainy'},
@@ -69,15 +71,15 @@ function Homepage(props) {
           value={city}
           onChange={handleChange}
         />
-        <button type="submit"><img src={search} width="80%"/></button>
+        <button type="submit"><img src={search} height= '25px'/></button>
       </form>
 
       {weatherData && (
         <>
         <div className="main">
           <div className="yesterday">
-
           </div>
+          <img src={leftArrow}/>
           <div className="weather-details">
             <div className="location">
               <span>{city}</span>
@@ -86,7 +88,7 @@ function Homepage(props) {
             <div className="temperature">
               <img src={thermo} width='14px'/>
               <div>
-              {weatherData.main.temp}°C <br />  {weatherData.weather[0].description}
+              {weatherData.main.temp}°C   <div>{weatherData.weather[0].description}</div>
 
               </div>
               <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} alt={weatherData.weather[0].main}/>
@@ -95,12 +97,14 @@ function Homepage(props) {
               <div className="datetime">{cityTime.toLocaleString()}</div>
             )}
             <div className="other-status">
-              <div>Humidity <br/>{weatherData.main.humidity}%</div>
-              <div>Visibility <br/>{weatherData.visibility / 1000} km</div>
-              <div>Air Pressure <br/>{weatherData.main.pressure} hPa</div>
-              <div>Wind <br/>{weatherData.wind.speed} mph</div>
+              <div> <div>Humidity </div>  <div>{weatherData.main.humidity}%</div> </div>
+              <div> <div>Visibility </div>  <div>{weatherData.visibility / 1000} km</div> </div>
+              <div> <div>Air Pressure </div>  <div>{weatherData.main.pressure} hPa</div> </div>
+              <div> <div>Wind </div>  <div>{weatherData.wind.speed} mph</div> </div>
             </div>
           </div>
+          <img src={rightArrow} />
+
           <div className="tomorrow">
             
           </div>
@@ -109,6 +113,7 @@ function Homepage(props) {
         {
           forecast.map(
             e => <div className='forecast-element'>
+              <div className='second-background'></div>
             <div>{e.day}</div>
             <div>{e.weather}</div>
             <div>{e.temp}°C</div>
